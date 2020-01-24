@@ -1,7 +1,5 @@
 package com.br.jms.test;
 
-import java.util.Scanner;
-
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -18,7 +16,7 @@ public class TestConsumer {
 			//Pegando configuracoes do connection factory do JNDI properties
 			InitialContext context = new InitialContext();//  iniciando o contexto, através dele será possível pegar os parametros do JNDI
 			ConnectionFactory factory = (ConnectionFactory) context.lookup("ConnectionFactory");//Pegando o nome da conexao com o ActiveMQ
-			//Preparando conexao com o activeMQ
+			//Preparando conexao com o activeMQO
 			Connection connection =   factory.createConnection();
 			//abrindo conexao
 			connection.start();
