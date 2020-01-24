@@ -3,9 +3,12 @@ package com.br.jms.test;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 
 public class TestConsumer {
@@ -28,6 +31,23 @@ public class TestConsumer {
 			//Consumindo a fila no ApacheMQ
 			MessageConsumer consumer = session.createConsumer(fila);
 			//Recebendo mensagens da fila do apacha atraves do consumer
+			
+			//adicionando um listener no consumer
+			consumer.setMessageListener(new MessageListener(){
+
+			    @Override
+			    public void onMessage(Message message){
+			        TextMessage textMessage  = (TextMessage)message;
+			        try{
+			            System.out.println(textMessage.getText());
+			        } catch(JMSException e){
+			            e.printStackTrace();
+			        }    
+			    }
+
+			});
+			
+			
 			Message receive = consumer.receive();
 			
 			System.out.println(receive);
